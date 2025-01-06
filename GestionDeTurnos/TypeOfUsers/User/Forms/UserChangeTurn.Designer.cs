@@ -33,7 +33,7 @@
             cmbTurns = new ComboBox();
             label2 = new Label();
             panel1 = new Panel();
-            button1 = new Button();
+            btnRequestChange = new Button();
             dataGridView1 = new DataGridView();
             label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -55,7 +55,7 @@
             cmbTurns.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbTurns.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbTurns.FormattingEnabled = true;
-            cmbTurns.Items.AddRange(new object[] { "7:00 am - 9:00 am", "9:00 am - 5:00 pm", "5:00 pm - 10:00 pm" });
+            cmbTurns.Items.AddRange(new object[] { "08:00 AM - 02:00 PM", "02:00 PM - 08:00 PM", "08:00 PM - 12:00 AM", "10:00 AM - 06:00 PM", "12:00 PM - 08:00 PM" });
             cmbTurns.Location = new Point(990, 187);
             cmbTurns.Name = "cmbTurns";
             cmbTurns.Size = new Size(356, 38);
@@ -82,20 +82,21 @@
             panel1.Size = new Size(505, 33);
             panel1.TabIndex = 6;
             // 
-            // button1
+            // btnRequestChange
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = Color.FromArgb(78, 197, 151);
-            button1.FlatAppearance.BorderColor = Color.Black;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(990, 231);
-            button1.Name = "button1";
-            button1.Size = new Size(356, 53);
-            button1.TabIndex = 12;
-            button1.Text = "Solicitar cambio";
-            button1.UseVisualStyleBackColor = false;
+            btnRequestChange.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnRequestChange.BackColor = Color.FromArgb(78, 197, 151);
+            btnRequestChange.FlatAppearance.BorderColor = Color.Black;
+            btnRequestChange.FlatStyle = FlatStyle.Flat;
+            btnRequestChange.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRequestChange.ForeColor = Color.Black;
+            btnRequestChange.Location = new Point(990, 231);
+            btnRequestChange.Name = "btnRequestChange";
+            btnRequestChange.Size = new Size(356, 53);
+            btnRequestChange.TabIndex = 12;
+            btnRequestChange.Text = "Solicitar cambio";
+            btnRequestChange.UseVisualStyleBackColor = false;
+            btnRequestChange.Click += btnRequestChange_Click;
             // 
             // dataGridView1
             // 
@@ -124,7 +125,7 @@
             ClientSize = new Size(1399, 666);
             Controls.Add(label3);
             Controls.Add(dataGridView1);
-            Controls.Add(button1);
+            Controls.Add(btnRequestChange);
             Controls.Add(label2);
             Controls.Add(cmbTurns);
             Controls.Add(label1);
@@ -132,6 +133,7 @@
             Name = "UserChangeTurn";
             Text = "UserChangeTurn";
             WindowState = FormWindowState.Maximized;
+            Load += UserChangeTurn_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -143,7 +145,7 @@
         private ComboBox cmbTurns;
         private Label label2;
         private Panel panel1;
-        private Button button1;
+        private Button btnRequestChange;
         private DataGridView dataGridView1;
         private Label label3;
     }

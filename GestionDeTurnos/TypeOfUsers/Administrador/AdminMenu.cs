@@ -12,9 +12,16 @@ namespace GestionDeTurnos.TypeOfUsers.Administrador
 {
     public partial class AdminMenu : Form
     {
-        public AdminMenu()
+        private Login main;
+        public AdminMenu(Login main)
         {
             InitializeComponent();
+            this.main = main;
+        }
+
+        private void AdminMenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

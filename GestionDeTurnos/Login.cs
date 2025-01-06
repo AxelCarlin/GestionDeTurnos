@@ -1,6 +1,7 @@
 using GestionDeTurnos.NewFolder;
 using GestionDeTurnos.Properties;
 using GestionDeTurnos.SessionOfUser;
+using GestionDeTurnos.TypeOfUsers.Administrador;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -11,6 +12,9 @@ namespace GestionDeTurnos
         public Login()
         {
             InitializeComponent();
+
+            // Se convierte en un arreglo de bytes todo el archivo para poder cargarse
+            // y reproducirse en el formulario
 
             byte[] archivoBytes = Resources.picturaTuArca;
             string rutaTemp = Path.Combine(Path.GetTempPath(), "picturaTuArca.mp3");
@@ -55,6 +59,7 @@ namespace GestionDeTurnos
             switch (SessionManager.idTipoUsuario)
             {
                 case 1:
+                    new AdminMenu(this).Show();
                     break;
                 case 2:
                     new UserMenu(this).Show();

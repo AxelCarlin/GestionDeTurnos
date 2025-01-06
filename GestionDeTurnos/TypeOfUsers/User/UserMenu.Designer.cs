@@ -44,9 +44,9 @@
             panel1.Controls.Add(btnCambioTurno);
             panel1.Controls.Add(btnUserViewTurn);
             panel1.Controls.Add(button1);
-            panel1.Location = new Point(0, 2);
+            panel1.Location = new Point(0, -1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(69, 669);
+            panel1.Size = new Size(69, 672);
             panel1.TabIndex = 0;
             // 
             // btnCambioTurno
@@ -103,6 +103,7 @@
             ClientSize = new Size(1399, 666);
             Controls.Add(panel1);
             Controls.Add(panel2);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "UserMenu";
             Text = "UserMenu";
             WindowState = FormWindowState.Maximized;

@@ -163,8 +163,9 @@
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pictureBox1.BackColor = SystemColors.ActiveBorder;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(425, 190);
+            pictureBox1.Location = new Point(419, 162);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(666, 380);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;

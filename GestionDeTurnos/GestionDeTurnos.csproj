@@ -44,11 +44,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TypeOfUsers\Administrador\Forms\" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+    <Folder Include="TypeOfUsers\Administrador\Forms\" />
   </ItemGroup>
 
 </Project>
