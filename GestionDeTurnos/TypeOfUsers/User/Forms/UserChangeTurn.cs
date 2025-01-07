@@ -63,6 +63,7 @@ namespace GestionDeTurnos.TypeOfUsers.User.Forms
         }
         private void btnRequestChange_Click(object sender, EventArgs e)
         {
+            // Validar que se haya seleccionado un turno
             string textoTurno = cmbTurns.SelectedItem?.ToString();
             if (string.IsNullOrEmpty(textoTurno))
             {
@@ -70,60 +71,62 @@ namespace GestionDeTurnos.TypeOfUsers.User.Forms
                 return;
             }
 
-            // 1. Obtener el ID del turno solicitado basado en el texto seleccionado
-            string queryTurnoId = @"
-    SELECT TOP 1 id 
-    FROM Turnos 
-    WHERE CONCAT(iniciaTurno, ' - ', finalizaTurno) = @TextoTurno";
-
-            SqlParameter turnoParam = new SqlParameter("@TextoTurno", textoTurno);
-            object turnoIdResult = Connection.ExecuteScalar(queryTurnoId, turnoParam);
-
-            if (turnoIdResult == null)
-            {
-                MessageBox.Show("El turno seleccionado no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            int turnoSolicitadoId = Convert.ToInt32(turnoIdResult);
-
-            // 2. Obtener el turno actual del empleado (usando el ID del usuario actual)
-            string queryTurnoActualId = @"
-    SELECT idTurno 
-    FROM Empleados 
-    WHERE idUsuario = @UsuarioActual AND estatus = 1";
-
-            SqlParameter[] queryParams = {
-        new SqlParameter("@UsuarioActual", SessionManager.idCurrentUser) // Usamos el ID del usuario actual
-    };
-
-            object turnoActualResult = Connection.ExecuteScalar(queryTurnoActualId, queryParams);
-
-            if (turnoActualResult == null)
-            {
-                MessageBox.Show("No se pudo encontrar el turno actual del empleado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            int turnoActualId = Convert.ToInt32(turnoActualResult);
-
-            // 3. Insertar la solicitud de cambio de turno en la tabla de SolicitudesCambioTurno
-            string queryInsertarSolicitud = @"
-    INSERT INTO SolicitudesCambioTurno (idEmpleado, idTurnoActual, idTurnoSolicitado, idUsuarioSolicitante, estatusSolicitud, fueAprobada)
-    VALUES (@IdEmpleado, @IdTurnoActual, @IdTurnoSolicitado, @IdUsuarioSolicitante, 1, 0)"; // Estatus 1 para pendiente, fueAprobada 0 para pendiente
-
-            SqlParameter[] insertParams = {
-        new SqlParameter("@IdEmpleado", SessionManager.idCurrentUser), // ID del empleado solicitante
-        new SqlParameter("@IdTurnoActual", turnoActualId), // Turno actual del empleado
-        new SqlParameter("@IdTurnoSolicitado", turnoSolicitadoId), // Turno solicitado
-        new SqlParameter("@IdUsuarioSolicitante", SessionManager.idCurrentUser) // ID del usuario que hace la solicitud
-    };
-
             try
             {
+                // 1. Obtener el ID del turno solicitado
+                string queryTurnoId = @"
+        SELECT TOP 1 id 
+        FROM Turnos 
+        WHERE CONCAT(iniciaTurno, ' - ', finalizaTurno) = @TextoTurno";
+
+                SqlParameter turnoParam = new SqlParameter("@TextoTurno", textoTurno);
+                object turnoIdResult = Connection.ExecuteScalar(queryTurnoId, turnoParam);
+
+                if (turnoIdResult == null)
+                {
+                    MessageBox.Show("El turno seleccionado no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int turnoSolicitadoId = Convert.ToInt32(turnoIdResult);
+
+                // 2. Obtener el turno actual del empleado
+                string queryTurnoActualId = @"
+        SELECT idTurno 
+        FROM Empleados 
+        WHERE idUsuario = @UsuarioActual AND estatus = 1";
+
+                SqlParameter[] queryParams = {
+            new SqlParameter("@UsuarioActual", SessionManager.idCurrentUser) // ID del usuario actual
+        };
+
+                object turnoActualResult = Connection.ExecuteScalar(queryTurnoActualId, queryParams);
+
+                if (turnoActualResult == null)
+                {
+                    MessageBox.Show("No se pudo encontrar el turno actual del empleado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int turnoActualId = Convert.ToInt32(turnoActualResult);
+
+                // 3. Insertar la solicitud de cambio de turno
+                string queryInsertarSolicitud = @"
+        INSERT INTO SolicitudesCambioTurno (idEmpleado, idTurnoActual, idTurnoSolicitado, idUsuarioSolicitante, estatusSolicitud, fueAprobada)
+        VALUES (@IdEmpleado, @IdTurnoActual, @IdTurnoSolicitado, @IdUsuarioSolicitante, 1, 0)";
+
+                SqlParameter[] insertParams = {
+            new SqlParameter("@IdEmpleado", SessionManager.idCurrentUser), // ID del empleado solicitante
+            new SqlParameter("@IdTurnoActual", turnoActualId), // Turno actual
+            new SqlParameter("@IdTurnoSolicitado", turnoSolicitadoId), // Turno solicitado
+            new SqlParameter("@IdUsuarioSolicitante", SessionManager.idCurrentUser) // Usuario solicitante
+        };
+
                 Connection.ExecuteQuery(queryInsertarSolicitud, insertParams);
+
+                // Mostrar éxito
                 MessageBox.Show("La solicitud de cambio de turno fue enviada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadData();
+                LoadData(); // Recargar datos en el DataGridView
             }
             catch (Exception ex)
             {

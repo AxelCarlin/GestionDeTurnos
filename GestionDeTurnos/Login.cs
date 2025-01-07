@@ -23,7 +23,7 @@ namespace GestionDeTurnos
 
             player.URL = rutaTemp;
             player.settings.setMode("loop", true);
-            player.settings.volume = 30;
+            player.settings.volume = 3;
             player.Ctlcontrols.play();
         }
 

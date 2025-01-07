@@ -13,9 +13,9 @@ namespace GestionDeTurnos
 
         private void btnUserViewTurn_Click(object sender, EventArgs e)
         {
-            if (panel2.Controls.OfType<UserViewTurn>().Any()) return;
+            if (panel2.Controls.OfType<UserHistory>().Any()) return;
 
-            ShowFormInPanel<UserViewTurn>();
+            ShowFormInPanel<UserHistory>();
         }
 
         private void btnCambioTurno_Click(object sender, EventArgs e)

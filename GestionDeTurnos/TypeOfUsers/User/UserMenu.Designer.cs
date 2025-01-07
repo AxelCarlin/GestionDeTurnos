@@ -55,7 +55,7 @@
             btnCambioTurno.BackgroundImageLayout = ImageLayout.Stretch;
             btnCambioTurno.FlatAppearance.BorderSize = 0;
             btnCambioTurno.FlatStyle = FlatStyle.Flat;
-            btnCambioTurno.Location = new Point(4, 145);
+            btnCambioTurno.Location = new Point(4, 79);
             btnCambioTurno.Name = "btnCambioTurno";
             btnCambioTurno.Size = new Size(60, 60);
             btnCambioTurno.TabIndex = 3;
@@ -68,7 +68,7 @@
             btnUserViewTurn.BackgroundImageLayout = ImageLayout.Stretch;
             btnUserViewTurn.FlatAppearance.BorderSize = 0;
             btnUserViewTurn.FlatStyle = FlatStyle.Flat;
-            btnUserViewTurn.Location = new Point(4, 79);
+            btnUserViewTurn.Location = new Point(4, 145);
             btnUserViewTurn.Name = "btnUserViewTurn";
             btnUserViewTurn.Size = new Size(60, 60);
             btnUserViewTurn.TabIndex = 2;

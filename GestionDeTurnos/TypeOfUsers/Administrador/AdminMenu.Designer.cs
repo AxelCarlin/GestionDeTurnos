@@ -58,6 +58,7 @@
             btnValidate.Size = new Size(60, 60);
             btnValidate.TabIndex = 2;
             btnValidate.UseVisualStyleBackColor = true;
+            btnValidate.Click += btnValidate_Click;
             // 
             // btnSalir
             // 
@@ -70,6 +71,7 @@
             btnSalir.Size = new Size(60, 60);
             btnSalir.TabIndex = 1;
             btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // panel2
             // 
