@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -75,6 +77,31 @@ namespace GestionDeTurnos.TypeOfUsers.Administrador.Forms
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         }
 
+        private void EnviarCorreo(string asunto, string mensaje)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("del.s0l.gestorpermisos@gmail.com");
+                mail.To.Add("angelsalas5432@gmail.com");
+                mail.Subject = asunto;
+                mail.Body = mensaje;
+
+                // Configuración del servidor SMTP
+                smtpServer.Port = 587;
+                smtpServer.Credentials = new NetworkCredential("del.s0l.gestorpermisos@gmail.com", "gtsu psto wnob cepo");
+                smtpServer.EnableSsl = true;
+
+                smtpServer.Send(mail);
+                MessageBox.Show("Correo electrónico enviado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al enviar el correo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnAutorizar_Click(object sender, EventArgs e)
         {
 
@@ -121,6 +148,8 @@ namespace GestionDeTurnos.TypeOfUsers.Administrador.Forms
                 Connection.ExecuteQuery(queryAuditoria, auditoriaParams);
 
                 MessageBox.Show("La solicitud ha sido autorizada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Enviar correo electrónico
+                EnviarCorreo("Solicitud autorizada", "La solicitud con ID " + solicitudId + " ha sido autorizada.");
 
                 // Recargar datos
                 LoadData();
@@ -176,7 +205,7 @@ namespace GestionDeTurnos.TypeOfUsers.Administrador.Forms
                 Connection.ExecuteQuery(queryAuditoria, auditoriaParams);
 
                 MessageBox.Show("La solicitud ha sido rechazada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                EnviarCorreo("Solicitud rechazada", "La solicitud con ID " + solicitudId + " ha sido rechazada.");
                 // Recargar datos
                 LoadData();
             }
