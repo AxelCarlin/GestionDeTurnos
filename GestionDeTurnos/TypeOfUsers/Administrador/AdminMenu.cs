@@ -37,6 +37,11 @@ namespace GestionDeTurnos.TypeOfUsers.Administrador
             Close();
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void ShowFormInPanel<T>() where T : Form
         {
             if (panel2.Controls.OfType<T>().Any()) return;

@@ -148,6 +148,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "UserHistory";
             Text = "UserHistory";
+            Load += UserHistory_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

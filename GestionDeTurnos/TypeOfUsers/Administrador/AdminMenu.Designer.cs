@@ -78,8 +78,9 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.Location = new Point(62, -1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1338, 669);
+            panel2.Size = new Size(1337, 669);
             panel2.TabIndex = 2;
+            panel2.Paint += panel2_Paint;
             // 
             // AdminMenu
             // 
@@ -89,6 +90,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminMenu";
             Text = "AdminMenu";
             WindowState = FormWindowState.Maximized;

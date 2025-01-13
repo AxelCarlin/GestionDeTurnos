@@ -165,5 +165,9 @@ namespace GestionDeTurnos.TypeOfUsers.User.Forms
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         }
 
+        private void UserHistory_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

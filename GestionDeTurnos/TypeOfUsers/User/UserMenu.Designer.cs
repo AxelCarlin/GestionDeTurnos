@@ -93,7 +93,7 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.Location = new Point(65, -1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1338, 669);
+            panel2.Size = new Size(1334, 669);
             panel2.TabIndex = 1;
             // 
             // UserMenu
@@ -104,6 +104,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "UserMenu";
             Text = "UserMenu";
             WindowState = FormWindowState.Maximized;

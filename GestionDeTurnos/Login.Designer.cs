@@ -34,7 +34,6 @@
             pictureBox2 = new PictureBox();
             label2 = new Label();
             label1 = new Label();
-            linkRecuperarClave = new LinkLabel();
             btnIngresar = new Button();
             txtClave = new TextBox();
             txtNombre = new TextBox();
@@ -67,7 +66,6 @@
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Controls.Add(linkRecuperarClave);
             panel2.Controls.Add(btnIngresar);
             panel2.Controls.Add(txtClave);
             panel2.Controls.Add(txtNombre);
@@ -109,18 +107,6 @@
             label1.Size = new Size(86, 25);
             label1.TabIndex = 4;
             label1.Text = "Nombre";
-            // 
-            // linkRecuperarClave
-            // 
-            linkRecuperarClave.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            linkRecuperarClave.AutoSize = true;
-            linkRecuperarClave.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            linkRecuperarClave.Location = new Point(169, 464);
-            linkRecuperarClave.Name = "linkRecuperarClave";
-            linkRecuperarClave.Size = new Size(145, 25);
-            linkRecuperarClave.TabIndex = 3;
-            linkRecuperarClave.TabStop = true;
-            linkRecuperarClave.Text = "Recuperar clave";
             // 
             // btnIngresar
             // 
@@ -205,6 +191,7 @@
             Controls.Add(pictureBox1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Login";
             Text = "Login";
             WindowState = FormWindowState.Maximized;
@@ -225,7 +212,6 @@
         private PictureBox pictureBox1;
         private TextBox txtNombre;
         private Label label1;
-        private LinkLabel linkRecuperarClave;
         private Button btnIngresar;
         private TextBox txtClave;
         private Panel panel2;
